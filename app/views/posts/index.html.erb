@@ -1,0 +1,30 @@
+<h1>Listing posts</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Content</th>
+    <th>Actions</th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr id="post_<%= post.id -%>" class="post">
+    <td><%= post.title %></td>
+    <td><%= post.author %></td>
+    <td><%= post.content %></td>
+    <td>
+      <%= link_to 'Show', post %>
+      <%= link_to 'Edit', edit_post_path(post) %>
+      <%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
+      <%#= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<div id="log"></div>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>
