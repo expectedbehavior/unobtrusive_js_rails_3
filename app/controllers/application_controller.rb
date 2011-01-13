@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   # put the flash hash into the response headers
   def header_flash
-    response.headers["flash"] = flash.to_json
+    response.headers["flash-messages"] = flash.to_json
     flash.each do |key, value|
       flash.delete key
     end

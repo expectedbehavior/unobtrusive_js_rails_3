@@ -4,7 +4,7 @@ jQuery(function($) {
   }
 
   function flash(xhr) {
-    flashes = evalify(xhr.getResponseHeader("Flash"))
+    flashes = evalify(xhr.getResponseHeader("flash-messages"))
     for(key in flashes) {
       $('<div title="'+key+'" class="'+key+'"><p>'+flashes[key]+'</p></div>').appendTo('#flash').delay(2500).fadeOut(400)
     }
