@@ -31,3 +31,4 @@ gem 'ruby-debug19'
 # end
 
 gem 'haml'
+gem 'awesome_print', :require => "ap"
