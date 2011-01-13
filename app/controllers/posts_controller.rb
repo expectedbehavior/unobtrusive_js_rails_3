@@ -45,7 +45,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
-        format.js   { render :json => { :flash => { :notice => "Post was successfully created." } } }
+        format.js   { render :json => { :notice => "Post was successfully created." }, :callback => :flash }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
@@ -80,7 +80,7 @@ class PostsController < ApplicationController
         redirect_to(posts_url)
       }
       format.js   {
-        render :json => {:flash => {:notice => "Post Removed Successfully"}}, :status => :ok
+        render :json => {:notice => "Post Removed Successfully"}, :callback => :flash
         #render :json => {:flash => { :error => "Error Removing Post"}}, :status => :unprocessable_entity
       }
     end
