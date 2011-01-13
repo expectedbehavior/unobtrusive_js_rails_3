@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  # GET /posts
-  # GET /posts.xml
   def index
     @posts = Post.all
 
@@ -10,8 +8,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.xml
   def show
     @post = Post.find(params[:id])
 
@@ -21,8 +17,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/new
-  # GET /posts/new.xml
   def new
     @post = Post.new
 
@@ -32,7 +26,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
   end
@@ -45,7 +38,6 @@ class PostsController < ApplicationController
         flash[:notice] = "Post was successfully created."
         format.html { redirect_to @post }
         format.js   { 
-          header_flash
           render :json => @post
         }
       else
@@ -55,8 +47,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PUT /posts/1
-  # PUT /posts/1.xml
   def update
     @post = Post.find(params[:id])
 
@@ -82,7 +72,6 @@ class PostsController < ApplicationController
         redirect_to(posts_url)
       }
       format.js   {
-        header_flash
         render :json => @post
       }
     end
