@@ -3,7 +3,8 @@ jQuery(function($) {
     return eval('('+data+')');
   }
 
-  function flash(flashes) {
+  function flash(xhr) {
+    flashes = evalify(xhr.getResponseHeader("Flash"))
     for(key in flashes) {
       $('<div title="'+key+'" class="'+key+'"><p>'+flashes[key]+'</p></div>').appendTo('#flash').delay(2500).fadeOut(400)
     }
@@ -14,7 +15,7 @@ jQuery(function($) {
       flash(xhr.responseText)
     })
     .bind("ajax:success",    function(event, data, status, xhr) {
-      $(this).closest('tr').remove() && evalify(data)
+      $(this).closest('tr').remove() && flash(xhr)
     })
     .bind("ajax:beforeSend", function(event, xhr, settings) {
       $(this).parent().append('<img src="/images/ajax-loader.gif"/>')
@@ -25,6 +26,6 @@ jQuery(function($) {
 
   $('form[data-remote=true]')
     .bind("ajax:success", function(event, data, status, xhr) {
-      $(this).find(":input:visible:not(:submit)").val('') && evalify(data)
+      $(this).find(":input:visible:not(:submit)").val('') && flash(xhr)
     })
 })

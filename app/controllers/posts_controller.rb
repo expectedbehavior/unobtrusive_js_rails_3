@@ -37,15 +37,17 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  # POST /posts
-  # POST /posts.xml
   def create
     @post = Post.new(params[:post])
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
-        format.js   { render :json => { :notice => "Post was successfully created." }, :callback => :flash }
+        flash[:notice] = "Post was successfully created."
+        format.html { redirect_to @post }
+        format.js   { 
+          header_flash
+          render :json => @post
+        }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
@@ -72,16 +74,16 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-#     sleep(2)
+#     sleep(2) # for simulating long requests for spinner
 
+    flash[:notice] = "Post Removed Successfully"
     respond_to do |format|
       format.html { 
-        flash[:notice] = "Post Removed Successfully"
         redirect_to(posts_url)
       }
       format.js   {
-        render :json => {:notice => "Post Removed Successfully"}, :callback => :flash
-        #render :json => {:flash => { :error => "Error Removing Post"}}, :status => :unprocessable_entity
+        header_flash
+        render :json => @post
       }
     end
   end
