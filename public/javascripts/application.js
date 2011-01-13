@@ -15,7 +15,7 @@ jQuery(function($) {
     }
   }
 
-  $('tr.post a[data-method=delete]')
+  $('tr a[data-method=delete]')
 //     .bind("ajax:error",      function(event, xhr, status, error) {
 //       flash(xhr.responseText)
 //     })
@@ -28,5 +28,11 @@ jQuery(function($) {
 //     })
 //     .bind("ajax:complete", function(event, xhr, status) {
 //       $('#log').append($(this).closest('tr').attr('id').replace(/post_/, '')+'<br/>');
+//     })
+
+//   $('form[data-remote=true]')
+//     .bind("ajax:success", function(event, data, status, xhr) {
+//       $(this).find(":input").val('')
+//       flash(data)
 //     })
 })
